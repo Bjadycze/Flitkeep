@@ -36,7 +36,7 @@ other feature is secondary to that.
 ### 1.1 What is explicitly out of scope for v1
 
 - Cloud sync, accounts, backup
-- Sharing items out of the app
+- Sharing items out of the app — except the text of a shopping list, via the Share Sheet (§11.18)
 - Search beyond simple text matching
 - Any form of streak, badge, counter, or gamification (see §7.3)
 - Floating overlay capture — cut after Task 0, see §11
@@ -584,6 +584,10 @@ Privacy rules, which outrank the feature:
 Cost rules: one call per item maximum, result cached in the row, never re-sent on edit unless
 the user asks. Batch overnight rather than on capture — nothing here is urgent, and it keeps
 the capture path free of network latency.
+
+**Exception:** an action the user explicitly requested runs immediately — still after the item
+is saved and after OCR, never on the capture path. The first such action is the recipe →
+shopping list flow (§11.18).
 
 **Done when:** the free tier is fully usable with Tier 3 disabled, opt-out is honoured
 retroactively for future generation, and no code path can send an image.
@@ -1154,6 +1158,135 @@ Do té doby je Task 8 hotový v kódu a nedokončený v Play Console.
 přidat licenční testery. Teprve pak dává smysl definition of done z Task 8 — koupit, zrušit,
 obnovit, a ověřit, že režim letadlo přístup nevezme.
 
+### 11.18 Recept → nákupní seznam (návrh, zatím se nekóduje)
+
+Uživatel vyfotí recept, do poznámky napíše „přidat na nákup na dnešní oběd" a appka z textu
+vytáhne suroviny, porovná je s inventářem a nabídne seznam ke schválení. První funkce, která
+používá cloudový model (Tier 3, §11.12). **Kód nezačíná před 31. 3. 2027**
+(`aplikace-dalsi-kroky.md`).
+
+**Průběh**
+
+1. Screenshot → notifikace → odpověď v poznámce.
+2. Tier 0 regex v **poznámce** pozná nákupní záměr. Lokálně, bez sítě.
+3. OCR text a poznámka jdou do modelu, ten vrátí suroviny jako JSON.
+4. Suroviny se spárují s produkty inventáře přes `MapovaniTextu`.
+5. Notifikace „Seznam je připravený" otevře schvalovací obrazovku.
+6. Potvrzení → interní nákupní seznam (modul 3), nebo text přes Share Sheet do jiné appky.
+
+**Rozhodnutí**
+
+- **Záměr se čte jen z poznámky, nikdy z OCR textu.** Screenshot e-shopu má „Koupit" na každém
+  tlačítku a spouštěl by funkci sám. Poznámku napsal uživatel, takže je to jeho pokyn.
+  Klíčová slova CZ i EN současně, stejně jako u Tier 1 (`nákup`, `nakoupit`, `koupit`,
+  `seznam`, `shopping`, `buy`, `grocery`).
+- **Detekce záměru nesmí jít přes model.** Poznat příkaz v cloudu by znamenalo poslat tam
+  každou poznámku, a to porušuje opt-in po položkách (§11.12). Do sítě jde jen položka,
+  u které Tier 0 záměr našel.
+- **Text, nikdy obrázek.** Beze změny proti §11.12 a Task 9. Odeslaná položka nese viditelnou
+  značku.
+- **Okamžitě, ne přes noc.** Výjimka z dávkování v Task 9 platí jen pro akci, kterou si
+  uživatel výslovně vyžádal. Volání běží v expedited workeru až po uložení položky a po OCR,
+  nikdy na capture path (§6.5). Uživatel je v tu chvíli u telefonu, takže Doze by se neměl
+  uplatnit — na MagicOS se to ale musí změřit (§12).
+- **Jedno volání na položku platí dál.** Volání vrací suroviny. Má-li uživatel zapnuté i
+  titulkování z Task 9, vrátí stejné volání i titulek a noční dávka položku přeskočí.
+- **Selhání nesmí být tiché.** Bez sítě, špatný klíč nebo prázdná odpověď → notifikace
+  „Seznam se nepodařilo připravit" s akcí Zkusit znovu. Položka i poznámka zůstávají.
+- **Množství z receptu jsou fakta, ne počítadlo.** „200 g mouky" je věc ve světě (rozlišení
+  k §7.3 z návrhu inventáře). Na obrazovce ale **žádný součet** typu „7 surovin ke koupi" —
+  to je seznam úkolů s číslem.
+- **„Nejspíš máš" je odhad z rytmu, ne stav.** Inventář nezná zásoby, jen datum posledního
+  nákupu a typickou periodu. Značka nese důvod („koupeno před 2 dny, obvykle vydrží 7")
+  a **nic se neodebírá samo** — odebrání je klepnutí uživatele. Surovina, kterou inventář
+  nezná, značku nemá; chybějící značka neznamená „nemáš".
+- **Odebraná surovina se barví přes `settled` / `onSettled`**, ne alfou a ne šedou (§11.13).
+  Druhé klepnutí ji vrátí.
+- **Funkce nepotřebuje inventář, aby fungovala.** Bez modulu 2 jen chybí značky. Pořadí stavby:
+  nákupní seznam a volání modelu, značky z inventáře až potom.
+- **Externí appky dostávají text přes Share Sheet** (`ACTION_SEND`, `text/plain`, jedna
+  surovina na řádek). Poznámkové appky nemají univerzální API a Google Keep ho pro běžné účty
+  nenabízí. Mění se tím §1.1: ven smí jen text nákupního seznamu.
+- **Bez klíče a bez Pro se nic nespouští a nic se nenabízí.** Poznámka se uloží jako každá
+  jiná. Žádná výzva „s AI by šlo…" — reklama na placenou funkci v okamžiku, kdy se rodí
+  myšlenka, je paywall v přestrojení (§11.2).
+
+**Zdroj modelu — dvě fáze**
+
+- **Fáze 1: vlastní API klíč, zdarma.** Žádný backend, žádné platby, žádná živnost. Poplatek
+  za vlastní klíč by odporoval §11.12: Tier 3 je placený jen proto, že volání stojí peníze
+  vývojáře, a s cizím klíčem nestojí nic. Vlastní klíč proto `EntitlementProvider` nikdy
+  negatuje. Zadání klíče je samo opt-in.
+- **Fáze 2: placený backend** s klíčem na serveru, až po rozhodnutí 31. 3. 2027. Klíč nikdy
+  v aplikaci ani v repu (`release-stav.md`).
+- Rozhraní `LlmClient` v `domain/`, implementace `ByokLlmClient` (fáze 1) a
+  `BackendLlmClient` (fáze 2). Na začátek **jeden poskytovatel**.
+- Úkol je extrakce do JSON, ne psaní. Stačí malý levný model.
+- Předplatné typu ChatGPT Plus nebo Claude Pro přístup k API nedává. Nastavení to musí říct
+  jednou větou, jinak uživatel zadá heslo od účtu místo klíče.
+
+**Úložiště klíče**
+
+- Šifrovaný klíčem z Android Keystore. Nikdy v logu, v chybové hlášce ani v repu.
+- **Vyloučený z Auto Backup** (`dataExtractionRules` / `fullBackupContent`). Keystore klíč
+  se neobnovuje, takže obnovená šifrovaná kopie by na novém zařízení nešla rozšifrovat.
+  Nerozšifrovatelný klíč appka čte jako „klíč chybí", nikdy jako pád.
+
+**Schvalovací obrazovka** (tlačítka schválená 25. 9. 2026)
+
+- **Přidat do seznamu** — primární, zapíše do interního nákupního seznamu (modul 3).
+- **Poslat do jiné aplikace** — sekundární, otevře náhled textu (jedna surovina na řádek)
+  a pak systémové sdílení.
+- Klepnutí na surovinu ji odebere (`settled` / `onSettled`, přeškrtnutí), druhé ji vrátí.
+- Nahoře zdrojová položka s poznámkou a značkou „Text odeslán modelu".
+- Potvrzení končí větou „Přidáno do nákupního seznamu." **Bez odměny** — přidání na seznam
+  není dovedení věci do konce (§11.8).
+
+**Zabezpečení a náklady**
+
+Fáze 1, vlastní klíč:
+
+- **Klíč vývojáře v appce neexistuje.** Rozebráním nebo zneužitím appky nevzniká vývojáři
+  žádný náklad.
+- Klíč uživatele jde přes HTTPS přímo poskytovateli, nikdy přes server SnapMindu.
+- **Denní strop volání v appce a žádné automatické opakování.** Chyba, která by volala ve
+  smyčce, je jediný způsob, jak by appka mohla uživateli vyčerpat kredit. Opakování je vždy
+  ruční tlačítko.
+- Nastavení doporučí nastavit měsíční limit útraty u poskytovatele.
+
+Fáze 2, backend:
+
+- **Klíč jen na serveru**, nikdy v APK ani v repu. APK jde rozbalit za minutu.
+- **Každý požadavek nese purchase token z Play Billingu a server ho ověří přímo u Googlu**
+  (Play Developer API). Neplatný token → odmítnuto. Fork s `EntitlementProvider = true`
+  tím nezíská nic: o přístupu rozhoduje server, ne appka (`release-stav.md`, uzavřené otázky).
+- **Server selhává zavřeně, appka otevřeně.** Task 8 platí pro appku: výpadek Play nevezme
+  přístup k existujícím výsledkům. Server bez ověřeného tokenu model nezavolá.
+- **Strop na předplatitele:** volání za den, maximální délka vstupu, maximální délka výstupu.
+  Nejhorší měsíc každého předplatitele je tím spočitatelný dopředu.
+- **Výše stropu:** nejhorší měsíční náklad na předplatitele musí být nižší než jeho měsíční
+  příjem po srážce Googlu (15 %). Při 400 Kč/rok je to zhruba 28 Kč/měsíc, strop = 28 Kč ÷
+  cena nejdražšího možného volání. Přepočítat při volbě modelu a při každé změně ceny.
+- **Jeden tarif, žádné dokupování** (rozhodnuto 25. 9. 2026). Strop je ochrana proti
+  zneužití, ne úroveň produktu, a nastavuje se tak, aby na něj běžné používání nikdy
+  nedosáhlo. Zbývající kredit by bylo ubývající počítadlo (§7.3) a nabídka navýšení by přišla
+  přesně v okamžiku naléhavé potřeby (§11.2). Dokupované kredity by navíc musel evidovat
+  server, včetně odečtu při vrácení platby. Neotevírat znovu, dokud data neukážou, že na strop
+  narážejí skuteční lidé — server proto loguje i okamžik dosažení stropu.
+- **Po dosažení stropu jen „Zítra zase."** Bez čísla, bez nabídky. Kdo potřebuje víc, má
+  fázi 1: vlastní klíč.
+- **Tvrdý měsíční limit útraty u poskytovatele modelu** je poslední pojistka. Po jeho dosažení
+  funkce hlásí nedostupnost; zachytávání a zbytek appky běží dál.
+- **Server text neukládá a obsah neloguje.** Loguje jen to, co potřebuje strop: hash tokenu,
+  čas, délku vstupu. Jinak by vývojář uchovával cizí screenshoty a nesl za ně odpovědnost
+  podle GDPR.
+
+**Před vydáním této funkce**
+
+- Play Console → Zabezpečení údajů: dnes „neshromažďuje", text teď opouští zařízení.
+  Deklaraci přehodnotit.
+- `privacy.html` doplnit: co se posílá, komu a kdy.
+
 ## 12. Open questions for the next hardware pass
 
 1. Samsung screenshot path — expected `DCIM/Screenshots`, not yet confirmed on a real device.
@@ -1168,3 +1301,9 @@ obnovit, a ověřit, že režim letadlo přístup nevezme.
 5. Jestli české datumy z reálného OCR (ML Kit občas vrací "15 . 3 ." s mezerami kolem tečky)
    projdou `Tier0RegexClassifier` — v testech ano, na reálných screenshotech zatím jen jeden
    vzorek.
+6. Jestli expedited worker spuštěný z `QuickCaptureReplyReceiver` doběhne na MagicOS do pár
+   sekund, nebo ho systém odloží stejně jako WorkManager v §7.4. Rozhoduje, jestli „na dnešní
+   oběd" vůbec platí (§11.18).
+7. Jak model zvládne OCR českého receptu — zlomené řádky, zlomky („½ lžičky"), suroviny ve
+   sloupcích. Otestovat na pěti skutečných screenshotech receptů dřív, než se napíše
+   cokoli dalšího (§11.18).
