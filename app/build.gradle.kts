@@ -16,7 +16,7 @@ android {
         targetSdk = 36
         // versionCode is never reused: Play rejects an upload that repeats one, even after
         // the build it belonged to was deleted. Increment on every upload.
-        versionCode = 1
+        versionCode = 2
         versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

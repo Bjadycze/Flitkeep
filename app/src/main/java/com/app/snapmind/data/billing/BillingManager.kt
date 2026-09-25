@@ -84,9 +84,10 @@ class BillingManager @Inject constructor(
             )
             .build()
 
-        client.queryProductDetailsAsync(params) { result, details ->
+        // Billing 8 hands back a QueryProductDetailsResult; the products are in productDetailsList.
+        client.queryProductDetailsAsync(params) { result, detailsResult ->
             if (result.responseCode != BillingClient.BillingResponseCode.OK) return@queryProductDetailsAsync
-            val product = details.firstOrNull() ?: return@queryProductDetailsAsync
+            val product = detailsResult.productDetailsList.firstOrNull() ?: return@queryProductDetailsAsync
             // The base plan's offer token is required for a subscription; without it Play
             // rejects the flow with a developer error rather than showing anything.
             val offerToken = product.subscriptionOfferDetails
