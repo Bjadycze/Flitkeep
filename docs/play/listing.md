@@ -8,7 +8,7 @@ Připraveno 16. 9. 2026. Limity Play: název 30 znaků, krátký popis 80, dlouh
 
 ### Název
 ```
-SnapMind
+Flitkeep
 ```
 
 ### Krátký popis (74 znaků)
@@ -21,7 +21,7 @@ Zachyť myšlenku za screenshotem dřív, než ti uteče. Bez odznaků, bez tlak
 Uděláš screenshot, protože tě něco zaujalo. Za hodinu ho najdeš v galerii mezi
 dalšími čtyřiceti a nevíš, proč tam je.
 
-SnapMind si toho screenshotu všimne v okamžiku, kdy vznikne, a dá ti pár sekund
+Flitkeep si toho screenshotu všimne v okamžiku, kdy vznikne, a dá ti pár sekund
 na jednu větu: k čemu to bylo. Napíšeš ji přímo z oznámení, ani nemusíš odemykat
 telefon. To je celé.
 
@@ -86,7 +86,7 @@ aplikaci na pozadí vypne.
 
 ### Název
 ```
-SnapMind
+Flitkeep
 ```
 
 ### Krátký popis (78 znaků)
@@ -99,7 +99,7 @@ Catch the thought behind a screenshot before it's gone. No badges, no pressure.
 You take a screenshot because something caught your attention. An hour later it
 sits in your gallery among forty others and you have no idea why it's there.
 
-SnapMind notices that screenshot the moment it appears and gives you a few seconds
+Flitkeep notices that screenshot the moment it appears and gives you a few seconds
 for one sentence: what it was for. You write it straight from the notification,
 without even unlocking the phone. That's the whole thing.
 

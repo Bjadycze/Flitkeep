@@ -1,10 +1,12 @@
 *[Česká verze](README.cs.md)*
 
-# SnapMind
+# Flitkeep
+
+Formerly SnapMind.
 
 An Android capture app for people with ADHD.
 
-Take a screenshot anywhere on your phone, or share something into the app, and SnapMind gives
+Take a screenshot anywhere on your phone, or share something into the app, and Flitkeep gives
 you a sub-three-second path to attach a note before the thought is gone. It reads the text
 from the image afterwards, keeps everything on the device, and brings things back later
 through a reminder engine designed not to nag.
@@ -15,7 +17,7 @@ fetching a title and thumbnail for links you share.
 ## Why it is built the way it is
 
 Most capture apps fail the same way: they turn into a pile of unfinished items that makes you
-feel worse every time you open them. SnapMind treats that as the primary design constraint,
+feel worse every time you open them. Flitkeep treats that as the primary design constraint,
 not a polish item.
 
 - **One notification a day, at most.** Not one per item.

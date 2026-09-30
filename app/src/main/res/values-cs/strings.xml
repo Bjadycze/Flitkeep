@@ -14,7 +14,7 @@
 
     <!-- Onboarding -->
     <string name="onboarding_title">Než začneme</string>
-    <string name="onboarding_intro">SnapMind potřebuje pár oprávnění, aby si všiml tvých screenshotů. Kterékoli můžeš přeskočit — sdílení do aplikace funguje i tak.</string>
+    <string name="onboarding_intro">Flitkeep potřebuje pár oprávnění, aby si všiml tvých screenshotů. Kterékoli můžeš přeskočit — sdílení do aplikace funguje i tak.</string>
     <string name="onboarding_continue">Hotovo</string>
     <string name="onboarding_skip">Zatím přeskočit</string>
 
@@ -25,16 +25,16 @@
     <string name="perm_media_reason">Potřeba, aby appka viděla screenshot, který jsi právě udělal. Zvol „Povolit vše" — částečný přístup tady nestačí.</string>
 
     <string name="perm_battery_title">Baterie</string>
-    <string name="perm_battery_reason">Bez výjimky systém SnapMind přes noc zmrazí a zachycení přestanou chodit.</string>
+    <string name="perm_battery_reason">Bez výjimky systém Flitkeep přes noc zmrazí a zachycení přestanou chodit.</string>
 
     <string name="perm_autostart_title">Automatické spouštění</string>
-    <string name="perm_autostart_reason">Telefon brání aplikacím ve spuštění po restartu. Zapni SnapMindu automatické spouštění, jinak bude mlčet, dokud ho sám neotevřeš.</string>
+    <string name="perm_autostart_reason">Telefon brání aplikacím ve spuštění po restartu. Zapni pro Flitkeep automatické spouštění, jinak bude mlčet, dokud ho sám neotevřeš.</string>
 
-    <string name="perm_hibernation_title">Nenech SnapMind usnout</string>
-    <string name="perm_hibernation_reason">Android vypíná aplikace, které málokdy otevřeš. SnapMind je dělaný tak, abys ho otevírat nemusel — takže ho systém dřív nebo později vypne, dokud tohle omezení nezrušíš.</string>
+    <string name="perm_hibernation_title">Nenech Flitkeep usnout</string>
+    <string name="perm_hibernation_reason">Android vypíná aplikace, které málokdy otevřeš. Flitkeep je dělaný tak, abys ho otevírat nemusel — takže ho systém dřív nebo později vypne, dokud tohle omezení nezrušíš.</string>
 
     <string name="perm_dnd_title">Nerušit</string>
-    <string name="perm_dnd_reason">Nepovinné. Bez toho přijdou zachycení v režimu Nerušit potichu, místo aby vyskočila. Na některých telefonech musíš SnapMind navíc ručně přidat do seznamu povolených.</string>
+    <string name="perm_dnd_reason">Nepovinné. Bez toho přijdou zachycení v režimu Nerušit potichu, místo aby vyskočila. Na některých telefonech musíš Flitkeep navíc ručně přidat do seznamu povolených.</string>
 
     <string name="action_allow">Povolit</string>
     <string name="action_open_settings">Otevřít nastavení</string>
@@ -46,11 +46,11 @@
 
     <!-- Hlavní obrazovka -->
     <string name="banner_permissions_title">Zachytávání nefunguje</string>
-    <string name="banner_permissions_body">Oprávnění, které SnapMind potřebuje, je vypnuté. Screenshotů si teď nevšímá.</string>
+    <string name="banner_permissions_body">Oprávnění, které Flitkeep potřebuje, je vypnuté. Screenshotů si teď nevšímá.</string>
     <string name="banner_permissions_action">Spravit</string>
 
     <string name="empty_title">Zatím nic zachyceného</string>
-    <string name="empty_body">Udělej kdekoli screenshot nebo do SnapMindu něco nasdílej. Objeví se to tady.</string>
+    <string name="empty_body">Udělej kdekoli screenshot nebo do aplikace Flitkeep něco nasdílej. Objeví se to tady.</string>
 
     <string name="section_archive">Archiv</string>
     <string name="item_no_note">Bez poznámky</string>
@@ -133,7 +133,7 @@
     <string name="settings_quiet_start_title">Ticho od</string>
     <string name="settings_quiet_body">V těchhle hodinách nechodí žádné připomínky.</string>
     <string name="settings_quiet_end_title">Ticho do</string>
-    <string name="settings_pro_title">SnapMind Pro</string>
+    <string name="settings_pro_title">Flitkeep Pro</string>
     <string name="settings_pro_body">Zachytávání, připomínky i hledání zůstávají zdarma navždy. Pro platí za to, co stojí peníze za každé použití — chytré názvy a shrnutí v cloudu.</string>
     <string name="settings_pro_active">Aktivní. Děkuju.</string>
     <string name="settings_pro_subscribe">Předplatit</string>

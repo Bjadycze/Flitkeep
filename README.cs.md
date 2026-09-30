@@ -1,10 +1,12 @@
 *[English version](README.md)*
 
-# SnapMind
+# Flitkeep
+
+Dříve SnapMind.
 
 Android aplikace pro zachytávání myšlenek, navržená pro lidi s ADHD.
 
-Uděláš kdekoli v telefonu screenshot nebo do aplikace něco nasdílíš a SnapMind ti dá cestu
+Uděláš kdekoli v telefonu screenshot nebo do aplikace něco nasdílíš a Flitkeep ti dá cestu
 kratší než tři sekundy, jak k tomu připsat poznámku, dokud tu myšlenku ještě máš. Text
 z obrázku přečte až potom, všechno drží v zařízení a věci vrací zpátky připomínkovým
 systémem, který je postavený tak, aby neotravoval.
@@ -15,7 +17,7 @@ kromě stažení titulku a náhledu k odkazu, který nasdílíš.
 ## Proč je postavená takhle
 
 Většina appek na zachytávání selhává stejně: promění se v hromadu nedodělaných položek, ze
-které je ti při každém otevření hůř. SnapMind to bere jako hlavní návrhové omezení, ne jako
+které je ti při každém otevření hůř. Flitkeep to bere jako hlavní návrhové omezení, ne jako
 věc k doladění na konec.
 
 - **Nejvýš jedna notifikace denně.** Ne jedna na položku.

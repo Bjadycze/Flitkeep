@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">SnapMind</string>
+    <string name="app_name" translatable="false">Flitkeep</string>
 
     <!-- Notification channels -->
     <string name="channel_capture_name">Quick capture</string>
@@ -15,7 +15,7 @@
 
     <!-- Onboarding -->
     <string name="onboarding_title">Before we start</string>
-    <string name="onboarding_intro">SnapMind needs a few permissions to notice your screenshots. You can skip any of them — the app still works when you share things into it.</string>
+    <string name="onboarding_intro">Flitkeep needs a few permissions to notice your screenshots. You can skip any of them — the app still works when you share things into it.</string>
     <string name="onboarding_continue">Done</string>
     <string name="onboarding_skip">Skip for now</string>
 
@@ -26,16 +26,16 @@
     <string name="perm_media_reason">Needed to see the screenshot you just took. Choose “Allow all” — partial access does not work for this.</string>
 
     <string name="perm_battery_title">Battery</string>
-    <string name="perm_battery_reason">Without an exemption the system freezes SnapMind overnight and captures stop arriving.</string>
+    <string name="perm_battery_reason">Without an exemption the system freezes Flitkeep overnight and captures stop arriving.</string>
 
     <string name="perm_autostart_title">Auto-launch</string>
-    <string name="perm_autostart_reason">Your phone blocks apps from starting after a restart. Turn on auto-launch for SnapMind, or it stays silent until you open it.</string>
+    <string name="perm_autostart_reason">Your phone blocks apps from starting after a restart. Turn on auto-launch for Flitkeep, or it stays silent until you open it.</string>
 
-    <string name="perm_hibernation_title">Keep SnapMind awake</string>
-    <string name="perm_hibernation_reason">Android switches off apps you rarely open. SnapMind is meant to run without you opening it, so it gets switched off eventually unless you turn this restriction off.</string>
+    <string name="perm_hibernation_title">Keep Flitkeep awake</string>
+    <string name="perm_hibernation_reason">Android switches off apps you rarely open. Flitkeep is meant to run without you opening it, so it gets switched off eventually unless you turn this restriction off.</string>
 
     <string name="perm_dnd_title">Do Not Disturb</string>
-    <string name="perm_dnd_reason">Optional. Without it, captures during Do Not Disturb arrive silently instead of popping up. On some phones you also need to add SnapMind to the Do Not Disturb allow-list by hand.</string>
+    <string name="perm_dnd_reason">Optional. Without it, captures during Do Not Disturb arrive silently instead of popping up. On some phones you also need to add Flitkeep to the Do Not Disturb allow-list by hand.</string>
 
     <string name="action_allow">Allow</string>
     <string name="action_open_settings">Open settings</string>
@@ -47,11 +47,11 @@
 
     <!-- Main screen -->
     <string name="banner_permissions_title">Captures are not working</string>
-    <string name="banner_permissions_body">A permission SnapMind needs was turned off. Screenshots are not being noticed right now.</string>
+    <string name="banner_permissions_body">A permission Flitkeep needs was turned off. Screenshots are not being noticed right now.</string>
     <string name="banner_permissions_action">Fix this</string>
 
     <string name="empty_title">Nothing captured yet</string>
-    <string name="empty_body">Take a screenshot anywhere, or share something into SnapMind. It will show up here.</string>
+    <string name="empty_body">Take a screenshot anywhere, or share something into Flitkeep. It will show up here.</string>
 
     <string name="section_archive">Archive</string>
     <string name="item_no_note">No note</string>
@@ -136,7 +136,7 @@
     <string name="settings_quiet_start_title">Quiet from</string>
     <string name="settings_quiet_body">No reminders during these hours.</string>
     <string name="settings_quiet_end_title">Quiet until</string>
-    <string name="settings_pro_title">SnapMind Pro</string>
+    <string name="settings_pro_title">Flitkeep Pro</string>
     <string name="settings_pro_body">Capture, reminders and search stay free forever. Pro pays for the part that costs money every time it runs — smart titles and summaries in the cloud.</string>
     <string name="settings_pro_active">Active. Thank you.</string>
     <string name="settings_pro_subscribe">Subscribe</string>
