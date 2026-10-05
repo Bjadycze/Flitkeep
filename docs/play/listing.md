@@ -58,7 +58,7 @@ cloudu, žádná analytika, žádná reklama. Rozpoznávání textu běží př�
 Jediný okamžik, kdy aplikace použije internet, je když do ní nasdílíš odkaz —
 tehdy si z té stránky vezme titulek a náhled, abys ji poznal i za týden.
 
-Zdrojový kód je veřejný: github.com/Bjadycze/SnapMind
+Zdrojový kód je veřejný: github.com/Bjadycze/Flitkeep
 
 CO APLIKACE UMÍ
 
@@ -137,7 +137,7 @@ analytics, no advertising. Text recognition runs on the device.
 The only time the app uses the internet is when you share a link into it — then it
 fetches that page's title and preview so you'll recognise it a week later.
 
-The source code is public: github.com/Bjadycze/SnapMind
+The source code is public: github.com/Bjadycze/Flitkeep
 
 WHAT IT DOES
 
@@ -168,7 +168,7 @@ shuts the app down in the background.
 - **Nejméně 2 screenshoty** telefonu — chybí
 - **Kategorie aplikace** — Productivity
 - **Kontaktní e-mail** — zobrazí se veřejně v listingu
-- **Zásady ochrany soukromí** — https://bjadycze.github.io/SnapMind/privacy.html ✔
+- **Zásady ochrany soukromí** — https://bjadycze.github.io/Flitkeep/privacy.html ✔
 
 ### Screenshoty — co vyfotit
 

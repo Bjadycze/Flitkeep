@@ -142,8 +142,8 @@
     <string name="settings_pro_subscribe">Subscribe</string>
     <string name="settings_back">Back</string>
     <string name="settings_about_title">About</string>
-    <string name="settings_about_source_host" translatable="false">github.com/Bjadycze/SnapMind</string>
-    <string name="settings_about_source_url" translatable="false">https://github.com/Bjadycze/SnapMind</string>
+    <string name="settings_about_source_host" translatable="false">github.com/Bjadycze/Flitkeep</string>
+    <string name="settings_about_source_url" translatable="false">https://github.com/Bjadycze/Flitkeep</string>
     <string name="settings_about_version">Version</string>
 
 </resources>
